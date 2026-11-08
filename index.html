@@ -7,7 +7,7 @@
 
 	<!-- Stylesheets
 	============================================= -->
-	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700|Roboto:300,400,500,700" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="css/google-fonts.css" type="text/css" />
 	<link rel="stylesheet" href="css/bootstrap.css" type="text/css" />
 	<link rel="stylesheet" href="style.css" type="text/css" />
 	<link rel="stylesheet" href="css/swiper.css" type="text/css" />
@@ -25,6 +25,19 @@
 
 	<link rel="stylesheet" href="css/responsive.css" type="text/css" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="preload" href="construction/images/slider/2.webp" as="image" type="image/webp" fetchpriority="high" />
+
+	<style>
+		/* images got intrinsic width/height attributes (CLS); keep the old height:auto sizing.
+		   :where() keeps this at element specificity so any sized class still wins. */
+		img:where([width][height]) { height: auto; }
+
+		/* First-paint layout = final layout. functions.js (captionPosition) used to place the slide caption
+		   after the first paint, and the page hid all of that behind the animsition spinner (#wrapper opacity 0
+		   until window.load). Same result in CSS: (slider height - caption height) / 2 is top: 50% shifted up by
+		   half the caption; `translate` composes with the transform the parallax script sets on scroll. */
+		#slider .slider-caption { top: 50% !important; translate: 0 -50%; }
+	</style>
 
 	<link rel="stylesheet" href="construction/css/colors.css" type="text/css" />
 
@@ -34,7 +47,7 @@
 
 </head>
 
-<body class="stretched">
+<body class="stretched no-transition">
 
 	<!-- Document Wrapper
 	============================================= -->
@@ -96,8 +109,8 @@
 				<!-- Logo
 				============================================= -->
 				<div id="logo">
-					<a href="index.html" class="standard-logo"><img src="construction/logo/logo.png" alt="Canvas Logo"></a>
-					<a href="index.html" class="retina-logo"><img src="construction/logo/logo@2x.png" alt="Canvas Logo"></a>
+					<a href="index.html" class="standard-logo"><img src="construction/logo/logo.png" alt="Canvas Logo" width="198" height="100" decoding="async"></a>
+					<a href="index.html" class="retina-logo"><img src="construction/logo/logo@2x.png" alt="Canvas Logo" width="395" height="200" loading="lazy" decoding="async"></a>
 				</div><!-- #logo end -->
 
 				<ul class="header-extras">
@@ -183,7 +196,7 @@
 
 			<div class="swiper-container swiper-parent">
 				<div class="swiper-wrapper">
-					<div class="swiper-slide" style="background-image: url('construction/images/slider/2.jpg'); background-position: center top;">
+					<div class="swiper-slide" style="background-image: url('construction/images/slider/2.webp'); background-position: center top;">
 						<div class="container clearfix">
 							<div class="slider-caption">
 								<h2>Welcome to Canvas</h2>
@@ -199,14 +212,12 @@
 							</div>
 						</div>
 						<div class="video-wrap">
-							<video id="slide-video" poster="construction/images/videos/1.jpg" preload="auto" loop autoplay muted>
-								<source src='construction/images/videos/1.webm' type='video/webm' />
-								<source src='construction/images/videos/1.mp4' type='video/mp4' />
+							<video id="slide-video" poster="construction/images/videos/1.webp" preload="auto" loop autoplay muted data-sources="construction/images/videos/1.webm|video/webm,construction/images/videos/1.mp4|video/mp4">
 							</video>
 							<div class="video-overlay" style="background-color: rgba(0,0,0,0.1);"></div>
 						</div>
 					</div>
-					<div class="swiper-slide" style="background-image: url('construction/images/slider/1.jpg'); background-position: center bottom;">
+					<div class="swiper-slide" style="background-image: url('construction/images/slider/1.webp'); background-position: center bottom;">
 						<div class="container clearfix">
 							<div  class="slider-caption">
 								<h2>Premium Constructions</h2>
@@ -240,7 +251,7 @@
 					<div class="col_one_third nobottommargin">
 						<div class="feature-box media-box">
 							<div class="fbox-media">
-								<img style="border-radius: 2px;" src="construction/images/services/1.jpg" alt="Why choose Us?">
+								<img style="border-radius: 2px;" src="construction/images/services/1.webp" alt="Why choose Us?" width="400" height="250" decoding="async">
 							</div>
 							<div class="fbox-desc">
 								<h3>Skilled Professionals.<span class="subtitle">Your Property in Good Hands.</span></h3>
@@ -252,7 +263,7 @@
 					<div class="col_one_third nobottommargin">
 						<div class="feature-box media-box">
 							<div class="fbox-media">
-								<img style="border-radius: 2px;" src="images/services/1.jpg" alt="Effective Planning">
+								<img style="border-radius: 2px;" src="images/services/1.webp" alt="Effective Planning" width="400" height="250" decoding="async">
 							</div>
 							<div class="fbox-desc">
 								<h3>Effective Planning.<span class="subtitle">Construction Process Organized.</span></h3>
@@ -264,7 +275,7 @@
 					<div class="col_one_third nobottommargin col_last">
 						<div class="feature-box media-box">
 							<div class="fbox-media">
-								<img style="border-radius: 2px;" src="construction/images/services/2.jpg" alt="Why choose Us?">
+								<img style="border-radius: 2px;" src="construction/images/services/2.webp" alt="Why choose Us?" width="400" height="250" decoding="async">
 							</div>
 							<div class="fbox-desc">
 								<h3>Risk Management.<span class="subtitle">We have got you Covered.</span></h3>
@@ -275,14 +286,14 @@
 
 				</div>
 
-				<div class="section parallax dark" style="background-image: url('construction/images/slider/1.jpg'); padding: 120px 0;"  data-bottom-top="background-position:0px 300px;" data-top-bottom="background-position:0px -300px;">
+				<div class="section parallax dark" style="background-image: url('construction/images/slider/1.webp'); padding: 120px 0;"  data-bottom-top="background-position:0px 300px;" data-top-bottom="background-position:0px -300px;">
 
 					<div class="fslider testimonial testimonial-full" data-arrows="false" style="z-index: 2;">
 						<div class="flexslider">
 							<div class="slider-wrap">
 								<div class="slide">
 									<div class="testi-image">
-										<a href="#"><img src="images/testimonials/3.jpg" alt="Customer Testimonails"></a>
+										<a href="#"><img src="images/testimonials/3.jpg" alt="Customer Testimonails" width="64" height="64" loading="lazy" decoding="async"></a>
 									</div>
 									<div class="testi-content">
 										<p>Similique fugit repellendus expedita excepturi iure provident quia eaque. Repellendus, vero numquam?</p>
@@ -294,7 +305,7 @@
 								</div>
 								<div class="slide">
 									<div class="testi-image">
-										<a href="#"><img src="images/testimonials/2.jpg" alt="Customer Testimonails"></a>
+										<a href="#"><img src="images/testimonials/2.jpg" alt="Customer Testimonails" width="64" height="64" loading="lazy" decoding="async"></a>
 									</div>
 									<div class="testi-content">
 										<p>Natus voluptatum enim quod necessitatibus quis expedita harum provident eos obcaecati id culpa corporis molestias.</p>
@@ -306,7 +317,7 @@
 								</div>
 								<div class="slide">
 									<div class="testi-image">
-										<a href="#"><img src="images/testimonials/1.jpg" alt="Customer Testimonails"></a>
+										<a href="#"><img src="images/testimonials/1.jpg" alt="Customer Testimonails" width="64" height="64" loading="lazy" decoding="async"></a>
 									</div>
 									<div class="testi-content">
 										<p>Incidunt deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero illo rerum!</p>
@@ -333,7 +344,7 @@
 							<div class="col-lg-4 col-md-6 bottommargin">
 								<div class="feature-box fbox-plain">
 									<div class="fbox-icon">
-										<a href="#"><img src="construction/images/icons/building.png" alt="Concrete Developments"></a>
+										<a href="#"><img src="construction/images/icons/building.png" alt="Concrete Developments" width="128" height="128" loading="lazy" decoding="async"></a>
 									</div>
 									<h3>Concrete Developments</h3>
 									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem minima, facere distinctio placeat.</p>
@@ -342,7 +353,7 @@
 							<div class="col-lg-4 col-md-6 bottommargin">
 								<div class="feature-box fbox-plain">
 									<div class="fbox-icon">
-										<a href="#"><img src="construction/images/icons/bank.png" alt="Finance Assistance"></a>
+										<a href="#"><img src="construction/images/icons/bank.png" alt="Finance Assistance" width="128" height="128" loading="lazy" decoding="async"></a>
 									</div>
 									<h3>Finance Assistance</h3>
 									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem minima, facere distinctio placeat.</p>
@@ -351,7 +362,7 @@
 							<div class="col-lg-4 col-md-6 bottommargin">
 								<div class="feature-box fbox-plain">
 									<div class="fbox-icon">
-										<a href="#"><img src="construction/images/icons/drawer.png" alt="Interiorly Designed"></a>
+										<a href="#"><img src="construction/images/icons/drawer.png" alt="Interiorly Designed" width="128" height="128" loading="lazy" decoding="async"></a>
 									</div>
 									<h3>Interiorly Designed</h3>
 									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem minima, facere distinctio placeat.</p>
@@ -360,7 +371,7 @@
 							<div class="col-lg-4 col-md-6 bottommargin">
 								<div class="feature-box fbox-plain">
 									<div class="fbox-icon">
-										<a href="#"><img src="construction/images/icons/paper-money.png" alt="Cost Effective Solutions"></a>
+										<a href="#"><img src="construction/images/icons/paper-money.png" alt="Cost Effective Solutions" width="128" height="128" loading="lazy" decoding="async"></a>
 									</div>
 									<h3>Cost Effective Solutions</h3>
 									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem minima, facere distinctio placeat.</p>
@@ -369,7 +380,7 @@
 							<div class="col-lg-4 col-md-6 bottommargin">
 								<div class="feature-box fbox-plain">
 									<div class="fbox-icon">
-										<a href="#"><img src="construction/images/icons/traffic-cone.png" alt="Smart Builders"></a>
+										<a href="#"><img src="construction/images/icons/traffic-cone.png" alt="Smart Builders" width="128" height="128" loading="lazy" decoding="async"></a>
 									</div>
 									<h3>Smart Builders</h3>
 									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem minima, facere distinctio placeat.</p>
@@ -378,7 +389,7 @@
 							<div class="col-lg-4 col-md-6 bottommargin">
 								<div class="feature-box fbox-plain">
 									<div class="fbox-icon">
-										<a href="#"><img src="construction/images/icons/paint-brush.png" alt="Quality Infrastructure"></a>
+										<a href="#"><img src="construction/images/icons/paint-brush.png" alt="Quality Infrastructure" width="128" height="128" loading="lazy" decoding="async"></a>
 									</div>
 									<h3>Quality Infrastructure</h3>
 									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem minima, facere distinctio placeat.</p>
@@ -397,7 +408,7 @@
 
 					<article class="portfolio-item pf-media pf-icons">
 						<div class="portfolio-image">
-							<img src="construction/images/projects/1.jpg" alt="The Atmosphere">
+							<img src="construction/images/projects/1.webp" alt="The Atmosphere" width="800" height="600" loading="lazy" decoding="async">
 							<div class="portfolio-overlay">
 								<a href="#" class="center-icon"><i class="icon-line-ellipsis"></i></a>
 							</div>
@@ -410,7 +421,7 @@
 
 					<article class="portfolio-item pf-illustrations">
 						<div class="portfolio-image">
-							<img src="construction/images/projects/2.jpg" alt="Wavelength Structure">
+							<img src="construction/images/projects/2.webp" alt="Wavelength Structure" width="800" height="600" loading="lazy" decoding="async">
 							<div class="portfolio-overlay">
 								<a href="#" class="center-icon"><i class="icon-line-ellipsis"></i></a>
 							</div>
@@ -423,7 +434,7 @@
 
 					<article class="portfolio-item pf-graphics pf-uielements">
 						<div class="portfolio-image">
-							<img src="construction/images/projects/3.jpg" alt="Greenhouse Garden">
+							<img src="construction/images/projects/3.webp" alt="Greenhouse Garden" width="800" height="600" loading="lazy" decoding="async">
 							<div class="portfolio-overlay">
 								<a href="#" class="center-icon"><i class="icon-line-ellipsis"></i></a>
 							</div>
@@ -436,7 +447,7 @@
 
 					<article class="portfolio-item pf-icons pf-illustrations">
 						<div class="portfolio-image">
-							<img src="construction/images/projects/4.jpg" alt="Industrial Hub">
+							<img src="construction/images/projects/4.webp" alt="Industrial Hub" width="800" height="600" loading="lazy" decoding="async">
 							<div class="portfolio-overlay">
 								<a href="#" class="center-icon"><i class="icon-line-ellipsis"></i></a>
 							</div>
@@ -449,7 +460,7 @@
 
 					<article class="portfolio-item pf-uielements pf-media">
 						<div class="portfolio-image">
-							<img src="construction/images/projects/5.jpg" alt="Corporate Headquarters">
+							<img src="construction/images/projects/5.webp" alt="Corporate Headquarters" width="800" height="600" loading="lazy" decoding="async">
 							<div class="portfolio-overlay">
 								<a href="#" class="center-icon"><i class="icon-line-ellipsis"></i></a>
 							</div>
@@ -462,7 +473,7 @@
 
 					<article class="portfolio-item pf-graphics pf-illustrations">
 						<div class="portfolio-image">
-							<img src="construction/images/projects/6.jpg" alt="Space Station">
+							<img src="construction/images/projects/6.webp" alt="Space Station" width="800" height="600" loading="lazy" decoding="async">
 							<div class="portfolio-overlay" data-lightbox="gallery">
 								<a href="#" class="center-icon"><i class="icon-line-ellipsis"></i></a>
 							</div>
@@ -475,7 +486,7 @@
 
 					<article class="portfolio-item pf-uielements pf-icons">
 						<div class="portfolio-image">
-							<img src="construction/images/projects/7.jpg" alt="Bent Architecture">
+							<img src="construction/images/projects/7.webp" alt="Bent Architecture" width="800" height="600" loading="lazy" decoding="async">
 							<div class="portfolio-overlay">
 								<a href="#" class="center-icon"><i class="icon-line-ellipsis"></i></a>
 							</div>
@@ -488,7 +499,7 @@
 
 					<article class="portfolio-item pf-graphics">
 						<div class="portfolio-image">
-							<img src="construction/images/projects/8.jpg" alt="Lakeview Center">
+							<img src="construction/images/projects/8.webp" alt="Lakeview Center" width="800" height="600" loading="lazy" decoding="async">
 							<div class="portfolio-overlay">
 								<a href="#" class="center-icon"><i class="icon-line-ellipsis"></i></a>
 							</div>
@@ -546,7 +557,7 @@
 									</div>
 								</div>
 								<div class="tab-content clearfix" id="construction-tab-2">
-									<img src="construction/images/projects/3.jpg" width="260" alt="Image" class="img-thumbnail alignleft">
+									<img src="construction/images/projects/3.webp" width="260" alt="Image" class="img-thumbnail alignleft" loading="lazy" decoding="async">
 									<p>Morbi tincidunt, dui sit amet facilisis feugiat, odio metus gravida ante, ut pharetra massa metus id nunc. Duis scelerisque molestie turpis. Sed fringilla, massa eget luctus malesuada, metus eros molestie lectus, ut tempus eros massa ut dolor. Aenean aliquet fringilla sem. Suspendisse sed ligula in ligula suscipit aliquam. Praesent in eros vestibulum mi adipiscing adipiscing. Morbi facilisis. Curabitur ornare consequat nunc. Aenean vel metus. Ut posuere viverra nulla. Aliquam erat volutpat. Pellentesque convallis. Maecenas feugiat, tellus pellentesque pretium posuere, felis lorem euismod felis, eu ornare leo nisi vel felis. Mauris consectetur tortor et purus.</p>
 								</div>
 								<div class="tab-content clearfix" id="construction-tab-3">
@@ -599,7 +610,7 @@
 												</div>
 											</div>
 											<div class="col-md-5 bottommargin-sm">
-												<img src="https://maps.googleapis.com/maps/api/staticmap?center=-37.814107,144.963280&zoom=12&markers=-37.814107,144.963280&size=300x180&key=AIzaSyCzkxzbEni5vR_Ugt1De8gBzrLX3236bnA" alt="Google Map" class="img-thumbnail">
+												<img loading="lazy" decoding="async" src="https://maps.googleapis.com/maps/api/staticmap?center=-37.814107,144.963280&zoom=12&markers=-37.814107,144.963280&size=300x180&key=AIzaSyCzkxzbEni5vR_Ugt1De8gBzrLX3236bnA" alt="Google Map" class="img-thumbnail">
 											</div>
 										</div>
 									</div>
@@ -639,12 +650,12 @@
 						<p>We prize our Clients more than everything else. We strive to provide Quality Services to all our Clients on a Priority Basis. You are invited to join our Clients List and enjoy our Services. <a href="#">See more...</a></p>
 
 						<ul class="clients-grid grid-3 nobottommargin clearfix">
-							<li style="padding: 20px;"><a href="#"><img src="images/clients/1.png" alt="Clients"></a></li>
-							<li style="padding: 20px;"><a href="#"><img src="images/clients/2.png" alt="Clients"></a></li>
-							<li style="padding: 20px;"><a href="#"><img src="images/clients/3.png" alt="Clients"></a></li>
-							<li style="padding: 20px;"><a href="#"><img src="images/clients/4.png" alt="Clients"></a></li>
-							<li style="padding: 20px;"><a href="#"><img src="images/clients/5.png" alt="Clients"></a></li>
-							<li style="padding: 20px;"><a href="#"><img src="images/clients/6.png" alt="Clients"></a></li>
+							<li style="padding: 20px;"><a href="#"><img src="images/clients/1.png" alt="Clients" width="400" height="300" loading="lazy" decoding="async"></a></li>
+							<li style="padding: 20px;"><a href="#"><img src="images/clients/2.png" alt="Clients" width="400" height="300" loading="lazy" decoding="async"></a></li>
+							<li style="padding: 20px;"><a href="#"><img src="images/clients/3.png" alt="Clients" width="400" height="300" loading="lazy" decoding="async"></a></li>
+							<li style="padding: 20px;"><a href="#"><img src="images/clients/4.png" alt="Clients" width="400" height="300" loading="lazy" decoding="async"></a></li>
+							<li style="padding: 20px;"><a href="#"><img src="images/clients/5.png" alt="Clients" width="400" height="300" loading="lazy" decoding="async"></a></li>
+							<li style="padding: 20px;"><a href="#"><img src="images/clients/6.png" alt="Clients" width="400" height="300" loading="lazy" decoding="async"></a></li>
 						</ul>
 					</div>
 
@@ -656,7 +667,7 @@
 							<div class="oc-item">
 								<div class="ipost clearfix">
 									<div class="entry-image">
-										<a href="construction/images/blog/5.jpg" data-lightbox="image"><img class="image_fade" src="construction/images/blog/5.jpg" alt="Standard Post with Image"></a>
+										<a href="construction/images/blog/5.webp" data-lightbox="image"><img class="image_fade" src="construction/images/blog/5.webp" alt="Standard Post with Image" width="500" height="280" loading="lazy" decoding="async"></a>
 									</div>
 									<div class="entry-title">
 										<h3><a href="#">Upcoming Projects in Australia</a></h3>
@@ -677,9 +688,9 @@
 										<div class="fslider" data-arrows="false" data-lightbox="gallery">
 											<div class="flexslider">
 												<div class="slider-wrap">
-													<div class="slide"><a href="construction/images/blog/2.jpg" data-lightbox="gallery-item"><img class="image_fade" src="construction/images/blog/2.jpg" alt="Standard Post with Gallery"></a></div>
-													<div class="slide"><a href="construction/images/blog/1.jpg" data-lightbox="gallery-item"><img class="image_fade" src="construction/images/blog/1.jpg" alt="Standard Post with Gallery"></a></div>
-													<div class="slide"><a href="construction/images/blog/3.jpg" data-lightbox="gallery-item"><img class="image_fade" src="construction/images/blog/3.jpg" alt="Standard Post with Gallery"></a></div>
+													<div class="slide"><a href="construction/images/blog/2.webp" data-lightbox="gallery-item"><img class="image_fade" src="construction/images/blog/2.webp" alt="Standard Post with Gallery" width="500" height="280" loading="lazy" decoding="async"></a></div>
+													<div class="slide"><a href="construction/images/blog/1.webp" data-lightbox="gallery-item"><img class="image_fade" src="construction/images/blog/1.webp" alt="Standard Post with Gallery" width="500" height="280" loading="lazy" decoding="async"></a></div>
+													<div class="slide"><a href="construction/images/blog/3.webp" data-lightbox="gallery-item"><img class="image_fade" src="construction/images/blog/3.webp" alt="Standard Post with Gallery" width="500" height="280" loading="lazy" decoding="async"></a></div>
 												</div>
 											</div>
 										</div>
@@ -700,7 +711,7 @@
 							<div class="oc-item">
 								<div class="ipost clearfix">
 									<div class="entry-image">
-										<a href="construction/images/blog/4.jpg" data-lightbox="image"><img class="image_fade" src="construction/images/blog/4.jpg" alt="Standard Post with Image"></a>
+										<a href="construction/images/blog/4.webp" data-lightbox="image"><img class="image_fade" src="construction/images/blog/4.webp" alt="Standard Post with Image" width="500" height="280" loading="lazy" decoding="async"></a>
 									</div>
 									<div class="entry-title">
 										<h3><a href="#">Global Excellence Construction Award</a></h3>
@@ -728,7 +739,7 @@
 
 						<div class="row">
 							<div class="col-lg-7">
-								<img src="construction/images/services/bottom-trust.jpg" alt="Bottom Trust">
+								<img src="construction/images/services/bottom-trust.webp" alt="Bottom Trust" width="800" height="499" loading="lazy" decoding="async">
 							</div>
 							<div class="col-lg-5 topmargin-sm">
 								<div class="heading-block nobottomborder">
@@ -767,7 +778,7 @@
 
 						<div class="widget clearfix">
 
-							<img src="images/footer-widget-logo.png" alt="" class="alignleft" style="margin-top: 8px; padding-right: 18px; border-right: 1px solid #4A4A4A;">
+							<img src="images/footer-widget-logo.png" alt="" class="alignleft" style="margin-top: 8px; padding-right: 18px; border-right: 1px solid #4A4A4A;" width="114" height="23" loading="lazy" decoding="async">
 
 							<p>We believe in <strong>Simple</strong>, <strong>Creative</strong> &amp; <strong>Flexible</strong> Design Standards with a Retina &amp; Responsive Approach. Browse the amazing Features this template offers.</p>
 
@@ -910,5 +921,29 @@
 	============================================= -->
 	<script src="js/functions.js"></script>
 
+	<script>
+		/* The slide-2 video (7.8 MB) is not visible at first paint (slide 1 is shown, the poster stands in), but its
+		   <source>s used to start downloading with the HTML and competed with the hero image and scripts. Attach
+		   them once the page has loaded; autoplay, loop and muted behave as before. html5Video() sizes the element from
+		   the poster, which has the video's own 16:9 ratio, so the layout is unchanged. Where the theme hides the video
+		   (phones swap in the poster) nothing is fetched at all. */
+		window.addEventListener('load', function () {
+			setTimeout(function () {
+				var video = document.getElementById('slide-video');
+				if (!video || !video.getAttribute('data-sources') || window.getComputedStyle(video).display === 'none') { return; }
+				video.getAttribute('data-sources').split(',').forEach(function (entry) {
+					var parts = entry.split('|'), source = document.createElement('source');
+					source.src = parts[0];
+					source.type = parts[1];
+					video.appendChild(source);
+				});
+				video.load();
+				var started = video.play();
+				if (started && started.catch) {
+					started.catch(function (err) { console.debug('slide-video autoplay was not allowed:', err && err.name); });
+				}
+			}, 100);
+		});
+	</script>
 </body>
 </html>
